@@ -1,0 +1,16 @@
+1. Used Docker and Nginx proxy to manage and route requests to the Jenkins and Hello World applications.
+
+2. Used Docker Compose  launch Jenkins and Hello World containers, ensuring they are connected to the Nginx proxy network.
+
+3. Develop a Python script (unit1.py) for a unit test to check if the atg.world website is working as expected.
+
+4.Executed Python Unit Test in Jenkins:
+
+Create a Freestyle project in Jenkins.
+Configure the project to pull the Python code from your GitHub repository.
+Add an "Execute Shell" build step with the command: python3 -m unittest task2/unit1.py.
+
+5.Run Jenkins Job
+
+6.If the atg.world website works, the Python unit test will pass.
+If the website doesn't work, the unit test will fail, indicating an issue with the website.
