@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"  # Map port 8080 on the host to port 80 on the container
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - default
+    environment:
+      - DEFAULT_HOST=default.domain  # Default host for requests without a VIRTUAL_HOST
+
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    expose:
+      - "8080"  # Map port 8080 on the host to port 8080 on the container
+    networks:
+      - default
+    environment:
+      - VIRTUAL_HOST=jenkins.madhavautomates.site  # Adjust the domain for Jenkins
+      - VIRTUAL_PORT=8080
+
+  hello-world:
+    image: madhavria/devops-intern-task-1:latest
+    container_name: hello
+    expose:
+      - "80"  # Expose port 80 on the container
+    networks:
+      - default
+    environment:
+      - VIRTUAL_HOST=hello.madhavautomates.site  # Adjust the domain for Apache
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
